@@ -1,0 +1,340 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   PAGE & ARRIÈRE-PLAN
+========================= */
+
+body {
+    min-height: 100vh;
+    padding: 30px;
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    overflow-x: hidden;
+    background-color: #3d1422; /* Couleur de secours */
+}
+
+/* Arrière-plan géré en pseudo-élément pour éviter les bugs de zoom/scroll */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+    /* Overlay couleur prune + Image */
+    background: 
+        linear-gradient(
+            rgba(61, 20, 34, 0.45),
+            rgba(61, 20, 34, 0.45)
+        ),
+        url("amour.avif");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* =========================
+   APPLICATION (CARTE)
+========================= */
+
+.application {
+    width: 100%;
+    max-width: 680px;
+    padding: 40px;
+
+    background: rgba(255, 250, 244, 0.92);
+    border-radius: 28px;
+    border: 1px solid rgba(201, 164, 92, 0.55);
+
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(10px);
+
+    position: relative;
+    z-index: 1;
+}
+
+/* =========================
+   EN-TÊTE
+========================= */
+
+.entete {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.petit-titre {
+    color: #b18a42;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+h1 {
+    color: #742844;
+    font-size: 36px;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.sous-titre {
+    color: #80656d;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+#compteurTaches {
+    display: inline-block;
+    color: #742844;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 7px 15px;
+    background: rgba(255, 250, 244, 0.85);
+    border: 1px solid rgba(201, 164, 92, 0.35);
+    border-radius: 20px;
+}
+
+/* =========================
+   AJOUT D'UNE TÂCHE
+========================= */
+
+.ajout-tache {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+#tachesInput {
+    flex: 1;
+    padding: 14px 17px;
+    border: 1px solid #dfc9b7;
+    border-radius: 13px;
+    outline: none;
+    background: rgba(255, 253, 249, 0.95);
+    color: #38252c;
+    font-size: 15px;
+    transition: all 0.25s ease;
+}
+
+#tachesInput::placeholder {
+    color: #a99599;
+}
+
+#tachesInput:focus {
+    border-color: #c9a45c;
+    box-shadow: 0 0 0 3px rgba(201, 164, 92, 0.15);
+}
+
+/* =========================
+   BOUTONS GÉNÉRAUX
+========================= */
+
+button {
+    border: none;
+    border-radius: 12px;
+    padding: 11px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+/* Bouton Ajouter */
+#ajouterBtn {
+    background: #742844;
+    color: white;
+    padding: 0 22px;
+    box-shadow: 0 5px 14px rgba(116, 40, 68, 0.22);
+}
+
+#ajouterBtn:hover {
+    background: #5f1f37;
+    transform: translateY(-2px);
+}
+
+/* =========================
+   FILTRES
+========================= */
+
+.filtres {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.filtres button {
+    background: rgba(255, 250, 244, 0.90);
+    color: #742844;
+    border: 1px solid #d8bd91;
+}
+
+.filtres button:hover {
+    background: #f4eadc;
+    border-color: #c9a45c;
+    transform: translateY(-2px);
+}
+
+.filtres button.actif {
+    background: #742844;
+    color: #ffffff;
+    border-color: #742844;
+}
+
+/* =========================
+   LISTE DES TÂCHES
+========================= */
+
+#listeTaches {
+    list-style: none;
+}
+
+#listeTaches li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid #eadbd0;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(75, 35, 45, 0.07);
+    transition: all 0.25s ease;
+}
+
+#listeTaches li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(75, 35, 45, 0.12);
+    border-color: rgba(201, 164, 92, 0.50);
+}
+
+#listeTaches li span {
+    flex: 1;
+    color: #38252c;
+    font-size: 15px;
+    word-break: break-word;
+}
+
+/* Style tâche terminée */
+#listeTaches li.terminee span {
+    text-decoration: line-through;
+    color: #9d8b90;
+}
+
+/* Conteneur des boutons d'action dans la liste */
+.actions-tache {
+    display: flex;
+    gap: 6px;
+    margin-left: auto;
+}
+
+#listeTaches li button {
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+}
+
+/* Boutons d'action */
+#listeTaches li button:first-of-type,
+#listeTaches li .btn-supprimer {
+    background: #f5e0e4;
+    color: #8c304d;
+}
+
+#listeTaches li button:first-of-type:hover,
+#listeTaches li .btn-supprimer:hover {
+    background: #eac7cf;
+    transform: translateY(-1px);
+}
+
+#listeTaches li button:nth-of-type(2),
+#listeTaches li .btn-terminer {
+    background: #e8eee5;
+    color: #55704d;
+}
+
+#listeTaches li button:nth-of-type(2):hover,
+#listeTaches li .btn-terminer:hover {
+    background: #d8e3d3;
+    transform: translateY(-1px);
+}
+
+#listeTaches li button:nth-of-type(3),
+#listeTaches li .btn-modifier {
+    background: #f3e7cd;
+    color: #8a6727;
+}
+
+#listeTaches li button:nth-of-type(3):hover,
+#listeTaches li .btn-modifier:hover {
+    background: #e9d7ac;
+    transform: translateY(-1px);
+}
+
+/* =========================
+   RESPONSIVE (MOBILE)
+========================= */
+
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+    .application {
+        padding: 25px 20px;
+        border-radius: 22px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .petit-titre {
+        letter-spacing: 2px;
+    }
+
+    .ajout-tache {
+        flex-direction: column;
+    }
+
+    #tachesInput {
+        width: 100%;
+    }
+
+    #ajouterBtn {
+        padding: 13px;
+    }
+
+    #listeTaches li {
+        flex-wrap: wrap;
+    }
+
+    #listeTaches li span {
+        flex-basis: 100%;
+        margin-bottom: 5px;
+    }
+
+    .actions-tache {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    #listeTaches li button {
+        flex: 1;
+    }
+}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ma liste de tâches ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="application">
+
+        <div class="entete">
+
+            <p class="petit-titre">MON ORGANISATEUR</p>
+
+            <h1>Ma liste de tâches</h1>
+
+            <p class="sous-titre">
+                Organise tes journées, une tâche à la fois.
+            </p>
+
+            <p id="compteurTaches"></p>
+
+        </div>
+
+        <!-- Zone d'ajout d'une tâche -->
+        <div class="ajout-tache">
+
+            <input
+                id="tachesInput"
+                type="text"
+                placeholder="Quelle est ta prochaine tâche ?"
+            >
+
+            <button id="ajouterBtn">
+                Ajouter
+            </button>
+
+        </div>
+
+        <!-- Filtres -->
+        <div class="filtres">
+
+            <button id="toutesBtn">
+                Toutes
+            </button>
+
+            <button id="enCoursBtn">
+                En cours
+            </button>
+
+            <button id="termineesBtn">
+                Terminées
+            </button>
+
+        </div>
+
+        <!-- Liste des tâches -->
+        <ul id="listeTaches"></ul>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
